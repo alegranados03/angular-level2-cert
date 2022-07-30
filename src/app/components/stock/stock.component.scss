@@ -1,0 +1,32 @@
+legend {
+  font-size: 1em;
+}
+
+.stock-card {
+  position: relative;
+  padding: 1.2em;
+}
+
+.close-btn {
+  color: red;
+  font-size: 1.2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.card-item {
+  text-align: center;
+}
+
+.arrow {
+  font-size: 5em;
+  text-align: center;
+  transform: translate(0, -32px);
+}
+.up {
+  color: #56d356;
+}
+.down {
+  color: #cd2929;
+}

@@ -1,9 +1,26 @@
-<header>
+<header class="card align-items-center">
+  <h1>Stock Tracker</h1>
   <form (ngSubmit)="onSearch()" [formGroup]="searchForm">
-    <p>
-      Enter the symbol of a stock to track <small>(i.e APPL,TSLA,GOOGL)</small>
-    </p>
-    <input formControlName="symbol" type="text" placeholder="Type symbol..." />
-    <button type="submit" [disabled]="searchForm.invalid">Search Stock</button>
+    <div class="form-group m-1">
+      <label for="symbol">
+        Enter the symbol of a stock to track
+        <small>(i.e APPL,TSLA,GOOGL)</small>
+      </label>
+      <input
+        formControlName="symbol"
+        type="text"
+        id="symbol"
+        placeholder="Type symbol..."
+        class="form-control"
+      />
+
+      <button
+        class="m-2 mt-0 btn btn-primary"
+        type="submit"
+        [disabled]="searchForm.invalid"
+      >
+        Search Stock
+      </button>
+    </div>
   </form>
 </header>

@@ -5,7 +5,7 @@ import { months } from '../utils/months.util';
   name: 'numberToMonth',
 })
 export class NumberToMonthPipe implements PipeTransform {
-  transform(value: number, ...args: unknown[]): unknown {
+  transform(value: number): unknown {
     return value >= 1 && value <= 12
       ? months[value as keyof typeof months]
       : '';

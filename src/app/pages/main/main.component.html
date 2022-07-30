@@ -1,5 +1,11 @@
-<app-search (searchEvent)="onSearchEvent($event)"></app-search>
+<div class="container p-2 mt-2">
+  <app-search (searchEvent)="onSearchEvent($event)"></app-search>
 
-<div *ngFor="let stock of stockList">
-  <app-stock [stock]="stock" (deleteEvent)="removeFromList($event)"></app-stock>
+  <div class="d-flex mt-2">
+    <app-stock
+      *ngFor="let stock of stockList"
+      [stock]="stock"
+      (deleteEvent)="removeFromList($event)"
+    ></app-stock>
+  </div>
 </div>

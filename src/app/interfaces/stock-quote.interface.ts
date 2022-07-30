@@ -5,6 +5,7 @@ export interface IstockQuote {
   o: number;
   pc: number;
   t: number;
+  dp:number;
 }
 
 export interface IstockSearchResponse {
@@ -26,6 +27,7 @@ export interface IStockCard {
   lowPriceOfDay: number;
   openPriceOfDay: number;
   previousClosePrice: number;
+  percentChange:number;
 }
 
 export interface ISentiment {

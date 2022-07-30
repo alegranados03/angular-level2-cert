@@ -10,9 +10,10 @@ import { StockComponent } from './components/stock/stock.component';
 import { MainComponent } from './pages/main/main.component';
 import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { NumberToMonthPipe } from './pipes/number-to-month.pipe';
+import { NumberWithSignPipe } from './pipes/number-with-sign.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, StockComponent, MainComponent, SentimentComponent, NumberToMonthPipe],
+  declarations: [AppComponent, SearchComponent, StockComponent, MainComponent, SentimentComponent, NumberToMonthPipe, NumberWithSignPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,

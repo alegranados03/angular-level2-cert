@@ -28,6 +28,7 @@ export class MainComponent implements OnInit {
         lowPriceOfDay: quote.l,
         openPriceOfDay: quote.o,
         previousClosePrice: quote.pc,
+        percentChange: quote.dp,
       });
     });
   }

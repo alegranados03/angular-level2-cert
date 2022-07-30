@@ -1,11 +1,24 @@
-<div>
-  <h2>Tesla Inc (TSLA)</h2>
+<div class="container">
+  <div class="card p-3 mt-4">
+    <h2>Tesla Inc (TSLA)</h2>
 
-  <div *ngFor="let sentiment of sentiments" class="month">
-    <p>{{ sentiment.month | numberToMonth }}</p>
-    <p>Change: {{ sentiment.change }}</p>
-    <p>mspr: {{ sentiment.mspr }}</p>
+    <div class="d-flex justify-content-around mt-3">
+      <div *ngFor="let sentiment of sentiments" class="month card flex-row p-3">
+        <div class="flex-column">
+          <p>
+            <strong>{{ sentiment.month | numberToMonth }}</strong>
+          </p>
+          <p><strong>Change:</strong> {{ sentiment.change | numberWithSign}}</p>
+          <p><strong>mspr:</strong> {{ sentiment.mspr }}</p>
+        </div>
+        <div class="flex-column">
+          <p class="arrow up m-0" *ngIf="sentiment.change > 0; else low">🡹</p>
+          <ng-template #low><p class="arrow down m-0">🡻</p></ng-template>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <button [routerLink]="['/']">Go back to list of stocks</button>
+  <button class="btn btn-primary m-2" [routerLink]="['/']">
+    Back to list of stocks
+  </button>
 </div>

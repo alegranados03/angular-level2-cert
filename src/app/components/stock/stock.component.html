@@ -1,12 +1,66 @@
-<div>
+<div class="card stock-card">
   <legend>{{ stock.symbol }}</legend>
   <h2>{{ stock.name }}</h2>
-  <p>Current price: {{ stock.currentPrice }}</p>
-  <p>Opening Price: {{ stock.openPriceOfDay }}</p>
-  <p>High price of day: {{ stock.highPriceOfDay }}</p>
-  <p>Low price of day: {{ stock.lowPriceOfDay }}</p>
-  <button (click)="deleteStock()">remove</button>
-  <button [routerLink]="['sentiment', stock.symbol]">
+
+  <div class="d-flex">
+    <div>
+      <div class="d-flex justify-content-between">
+        <div class="card-item flex-column">
+          <p class="m-1">
+            <strong>Current price:</strong>
+          </p>
+          <p>
+            {{ stock.currentPrice | currency }}
+          </p>
+        </div>
+
+        <div class="card-item flex-column">
+          <p class="m-1">
+            <strong>Opening Price:</strong>
+          </p>
+          <p>
+            {{ stock.openPriceOfDay | currency }}
+          </p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="card-item flex-column">
+          <p class="m-1">
+            <strong>High price of day:</strong>
+          </p>
+          <p>
+            {{ stock.highPriceOfDay | currency }}
+          </p>
+        </div>
+
+        <div class="card-item flex-column">
+          <p class="m-1">
+            <strong>Low price of day:</strong>
+          </p>
+          <p>
+            {{ stock.lowPriceOfDay | currency }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column">
+      <div class="card-item flex-column">
+        <p class="m-1">
+          <strong>Change today:</strong>
+        </p>
+        <p>
+          {{ stock.percentChange | numberWithSign }}
+        </p>
+      </div>
+
+      <p class="arrow up m-0" *ngIf="stock.percentChange > 0; else low">🡹</p>
+      <ng-template #low><p class="arrow down m-0">🡻</p></ng-template>
+    </div>
+  </div>
+  <button class="btn close-btn" (click)="deleteStock()">x</button>
+  <button class="btn btn-secondary" [routerLink]="['sentiment', stock.symbol]">
     Go to social sentiment details
   </button>
 </div>

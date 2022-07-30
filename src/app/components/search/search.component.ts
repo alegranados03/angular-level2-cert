@@ -9,7 +9,7 @@ export class SearchComponent {
   @Output() searchEvent = new EventEmitter<string>();
   searchForm: FormGroup = this.fb.group({
     symbol: [
-      '',
+      'TSLA',
       [Validators.required, Validators.maxLength(5), Validators.minLength(1)],
     ],
   });
