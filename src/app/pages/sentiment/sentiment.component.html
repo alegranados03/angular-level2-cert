@@ -1,0 +1,11 @@
+<div>
+  <h2>Tesla Inc (TSLA)</h2>
+
+  <div *ngFor="let sentiment of sentiments" class="month">
+    <p>{{ sentiment.month | numberToMonth }}</p>
+    <p>Change: {{ sentiment.change }}</p>
+    <p>mspr: {{ sentiment.mspr }}</p>
+  </div>
+
+  <button [routerLink]="['/']">Go back to list of stocks</button>
+</div>

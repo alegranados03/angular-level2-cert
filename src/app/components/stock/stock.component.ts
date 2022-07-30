@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IStockCard } from 'src/app/interfaces/stock-quote.interface';
 
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss']
+  styleUrls: ['./stock.component.scss'],
 })
-export class StockComponent implements OnInit {
+export class StockComponent {
+  @Input()
+  stock!: IStockCard;
 
-  constructor() { }
+  @Output() deleteEvent = new EventEmitter<IStockCard>();
 
-  ngOnInit(): void {
+  deleteStock() {
+    this.deleteEvent.emit(this.stock);
   }
-
 }

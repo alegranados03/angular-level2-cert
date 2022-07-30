@@ -18,4 +18,20 @@ export interface IStockSearchObject {
   type: string;
 }
 
-export interface IStockCard{}
+export interface IStockCard {
+  name: string;
+  symbol: string;
+  currentPrice: number;
+  highPriceOfDay: number;
+  lowPriceOfDay: number;
+  openPriceOfDay: number;
+  previousClosePrice: number;
+}
+
+export interface ISentiment {
+  symbol: string;
+  year: number;
+  month: number;
+  change: number;
+  mspr: number;
+}

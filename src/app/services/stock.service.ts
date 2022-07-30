@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import {
+  ISentiment,
   IstockQuote,
   IstockSearchResponse,
 } from '../interfaces/stock-quote.interface';
@@ -31,5 +32,23 @@ export class StockService {
       symbol: params,
       token: this.token,
     });
+  }
+
+  getInsiderSentiment(params: { symbol: string; from: string; to: string }) {
+    return this.appHttpService
+      .getHttp<{ data: ISentiment[]; symbol: string }>(
+        '/stock/insider-sentiment',
+        {
+          symbol: params.symbol,
+          from: params.from,
+          to: params.to,
+          token: this.token,
+        }
+      )
+      .pipe(
+        map((response) => {
+          return response.data;
+        })
+      );
   }
 }

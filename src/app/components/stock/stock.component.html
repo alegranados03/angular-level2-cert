@@ -1,1 +1,12 @@
-<p>stock works!</p>
+<div>
+  <legend>{{ stock.symbol }}</legend>
+  <h2>{{ stock.name }}</h2>
+  <p>Current price: {{ stock.currentPrice }}</p>
+  <p>Opening Price: {{ stock.openPriceOfDay }}</p>
+  <p>High price of day: {{ stock.highPriceOfDay }}</p>
+  <p>Low price of day: {{ stock.lowPriceOfDay }}</p>
+  <button (click)="deleteStock()">remove</button>
+  <button [routerLink]="['sentiment', stock.symbol]">
+    Go to social sentiment details
+  </button>
+</div>

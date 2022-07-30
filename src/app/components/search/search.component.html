@@ -1,1 +1,9 @@
-<p>search works!</p>
+<header>
+  <form (ngSubmit)="onSearch()" [formGroup]="searchForm">
+    <p>
+      Enter the symbol of a stock to track <small>(i.e APPL,TSLA,GOOGL)</small>
+    </p>
+    <input formControlName="symbol" type="text" placeholder="Type symbol..." />
+    <button type="submit" [disabled]="searchForm.invalid">Search Stock</button>
+  </form>
+</header>

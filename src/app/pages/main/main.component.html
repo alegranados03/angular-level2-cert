@@ -1,0 +1,5 @@
+<app-search (searchEvent)="onSearchEvent($event)"></app-search>
+
+<div *ngFor="let stock of stockList">
+  <app-stock [stock]="stock" (deleteEvent)="removeFromList($event)"></app-stock>
+</div>
