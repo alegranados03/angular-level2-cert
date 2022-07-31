@@ -1,14 +1,19 @@
 <div class="container">
   <div class="card p-3 mt-4">
-    <h2>Tesla Inc (TSLA)</h2>
+    <h2>{{ companyName }}</h2>
 
     <div class="d-flex justify-content-around mt-3">
+      <div *ngIf="sentiments.length <= 0">
+        <h4>Woops! something happened, there's no info...</h4>
+      </div>
       <div *ngFor="let sentiment of sentiments" class="month card flex-row p-3">
         <div class="flex-column">
           <p>
             <strong>{{ sentiment.month | numberToMonth }}</strong>
           </p>
-          <p><strong>Change:</strong> {{ sentiment.change | numberWithSign}}</p>
+          <p>
+            <strong>Change:</strong> {{ sentiment.change | numberWithSign }}
+          </p>
           <p><strong>mspr:</strong> {{ sentiment.mspr }}</p>
         </div>
         <div class="flex-column">

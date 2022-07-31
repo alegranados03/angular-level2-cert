@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StockService } from 'src/app/services/stock.service';
 import { forkJoin } from 'rxjs';
 import { IStockCard } from 'src/app/interfaces/stock-quote.interface';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -10,7 +11,9 @@ import { IStockCard } from 'src/app/interfaces/stock-quote.interface';
 export class MainComponent implements OnInit {
   constructor(private stockService: StockService) {}
 
-  stockList: IStockCard[] = [];
+  get stockList() {
+    return this.stockService.stockList;
+  }
   ngOnInit(): void {}
 
   onSearchEvent(symbol: string) {
@@ -18,9 +21,8 @@ export class MainComponent implements OnInit {
       this.stockService.getQuote(symbol),
       this.stockService.symbolSearch(symbol),
     ]).subscribe((response) => {
-      console.log(response);
       const [quote, searchResult] = response;
-      this.stockList.push({
+      this.stockService.pushStock({
         name: searchResult.description,
         symbol: searchResult.displaySymbol,
         currentPrice: quote.c,
@@ -34,7 +36,6 @@ export class MainComponent implements OnInit {
   }
 
   removeFromList(stock: IStockCard) {
-    const index = this.stockList.indexOf(stock);
-    this.stockList.splice(index, 1);
+    this.stockService.removeStock(stock);
   }
 }

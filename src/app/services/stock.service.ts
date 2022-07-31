@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import {
   ISentiment,
+  IStockCard,
   IstockQuote,
   IstockSearchResponse,
 } from '../interfaces/stock-quote.interface';
@@ -13,7 +14,29 @@ import { AppHttpService } from './app-http.service';
 })
 export class StockService {
   token = environment.token;
-  constructor(private appHttpService: AppHttpService) {}
+  private _stockList: IStockCard[] = [];
+  constructor(private appHttpService: AppHttpService) {
+    const stocks = localStorage.getItem('stocks');
+    if (stocks) {
+      this._stockList = JSON.parse(stocks);
+    }
+  }
+
+  get stockList() {
+    return this._stockList;
+  }
+
+  pushStock(stock: IStockCard) {
+    this._stockList.push(stock);
+    localStorage.setItem('stocks', JSON.stringify(this._stockList));
+  }
+
+  removeStock(stock: IStockCard) {
+    const index = this._stockList.indexOf(stock);
+    this._stockList.splice(index, 1);
+    localStorage.setItem('stocks', JSON.stringify(this._stockList));
+  }
+
   symbolSearch(params: string) {
     return this.appHttpService
       .getHttp<IstockSearchResponse>('/search', {
