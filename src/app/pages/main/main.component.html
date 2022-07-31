@@ -1,7 +1,7 @@
 <div class="container p-2 mt-2">
   <app-search (searchEvent)="onSearchEvent($event)"></app-search>
 
-  <div class="d-flex mt-2">
+  <div class="d-grid mt-2 parrilla">
     <app-stock
       *ngFor="let stock of stockList"
       [stock]="stock"

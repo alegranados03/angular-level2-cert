@@ -18,7 +18,6 @@ export class SentimentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //symbol=TSLA&from=2022-01-01&to=2022-03-01
     this.activatedRoute.params
       .pipe(
         switchMap((params) => {
@@ -35,11 +34,10 @@ export class SentimentComponent implements OnInit {
       )
       .subscribe((sentiments) => {
         this.sentiments = sentiments;
-        console.log(sentiments);
       });
   }
 
-  dateFormat(date: Date) {
+  dateFormat(date: Date): string {
     return `${date.getFullYear()}-${
       date.getMonth() >= 10 ? date.getMonth() : '0' + date.getMonth()
     }-${date.getDate() >= 10 ? date.getDate() : '0' + date.getDate()}`;

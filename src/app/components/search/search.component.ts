@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SearchComponent {
   @Output() searchEvent = new EventEmitter<string>();
+  stringLimit = 5;
   searchForm: FormGroup = this.fb.group({
     symbol: [
       'TSLA',

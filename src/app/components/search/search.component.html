@@ -12,6 +12,9 @@
         id="symbol"
         placeholder="Type symbol..."
         class="form-control"
+        appInputTextLimit
+        [maxlength]="stringLimit"
+        [limit]="stringLimit"
       />
 
       <button
