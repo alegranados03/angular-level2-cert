@@ -10,7 +10,7 @@ export class SearchComponent {
   stringLimit = 5;
   searchForm: FormGroup = this.fb.group({
     symbol: [
-      'TSLA',
+      '',
       [Validators.required, Validators.maxLength(5), Validators.minLength(1)],
     ],
   });
