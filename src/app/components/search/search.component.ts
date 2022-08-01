@@ -16,14 +16,7 @@ export class SearchComponent {
   });
   constructor(private fb: FormBuilder) {}
 
-  validateField(controlName: string) {
-    return (
-      !!this.searchForm.controls[controlName]?.errors &&
-      this.searchForm.controls[controlName]?.touched
-    );
-  }
-
-  onSearch() {
+  onSearch(): void {
     if (this.searchForm.valid)
       this.searchEvent.emit(this.searchForm.value.symbol.trim());
     this.searchForm.reset();

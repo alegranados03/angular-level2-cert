@@ -22,32 +22,34 @@ export class MainComponent implements OnInit {
     });
   }
 
-  onSearchEvent(symbol: string) {
+  onSearchEvent(symbol: string): void {
     forkJoin([
       this.stockService.getQuote(symbol),
       this.stockService.symbolSearch(symbol),
-    ]).pipe(
-      catchError((err)=>{
+    ])
+      .pipe(
+        catchError((err) => {
+          this.stockService.isLoading.next(false);
+          throw err;
+        })
+      )
+      .subscribe((response) => {
+        const [quote, searchResult] = response;
+        this.stockService.pushStock({
+          name: searchResult.description,
+          symbol: searchResult.displaySymbol,
+          currentPrice: quote.c,
+          highPriceOfDay: quote.h,
+          lowPriceOfDay: quote.l,
+          openPriceOfDay: quote.o,
+          previousClosePrice: quote.pc,
+          percentChange: quote.dp,
+        });
         this.stockService.isLoading.next(false);
-        throw err;
-      })
-    ).subscribe((response) => {
-      const [quote, searchResult] = response;
-      this.stockService.pushStock({
-        name: searchResult.description,
-        symbol: searchResult.displaySymbol,
-        currentPrice: quote.c,
-        highPriceOfDay: quote.h,
-        lowPriceOfDay: quote.l,
-        openPriceOfDay: quote.o,
-        previousClosePrice: quote.pc,
-        percentChange: quote.dp,
       });
-      this.stockService.isLoading.next(false);
-    });
   }
 
-  removeFromList(stock: IStockCard) {
+  removeFromList(stock: IStockCard): void {
     this.stockService.removeStock(stock);
   }
 }

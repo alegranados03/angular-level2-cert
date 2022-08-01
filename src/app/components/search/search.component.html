@@ -15,8 +15,9 @@
         appInputTextLimit
         [maxlength]="stringLimit"
         [limit]="stringLimit"
+        (keyup.enter)="onSearch()"
       />
-
+      
       <button
         class="m-2 mt-0 btn btn-primary"
         type="submit"

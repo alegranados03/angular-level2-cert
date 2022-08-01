@@ -16,7 +16,7 @@ export class InputTextLimitDirective {
   constructor(private el: ElementRef<HTMLInputElement>) {}
 
   @HostListener('keydown', ['$event'])
-  lettersOnly(event: KeyboardEvent) {
+  lettersOnly(event: KeyboardEvent): void {
     event.stopPropagation();
     if (this.specialKeys.indexOf(event.key) !== -1) {
       return;
