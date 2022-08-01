@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StockService } from 'src/app/services/stock.service';
 import { forkJoin } from 'rxjs';
 import { IStockCard } from 'src/app/interfaces/stock-quote.interface';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -25,7 +26,12 @@ export class MainComponent implements OnInit {
     forkJoin([
       this.stockService.getQuote(symbol),
       this.stockService.symbolSearch(symbol),
-    ]).subscribe((response) => {
+    ]).pipe(
+      catchError((err)=>{
+        this.stockService.isLoading.next(false);
+        throw err;
+      })
+    ).subscribe((response) => {
       const [quote, searchResult] = response;
       this.stockService.pushStock({
         name: searchResult.description,

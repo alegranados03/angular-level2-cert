@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { ISentiment } from 'src/app/interfaces/stock-quote.interface';
 import { StockService } from 'src/app/services/stock.service';
 
@@ -39,6 +39,10 @@ export class SentimentComponent implements OnInit {
             }),
             this.stockService.symbolSearch(params.symbol),
           ]);
+        }),
+        catchError((err)=>{
+          this.stockService.isLoading.next(false);
+          throw err;
         })
       )
       .subscribe((responses) => {
