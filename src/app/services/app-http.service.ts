@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: "root"
 })
 export class AppHttpService {
 
-  apiUrl = 'https://finnhub.io/api/v1';
+  apiUrl = environment.apiUrl;
   constructor(private httpClient: HttpClient) {}
 
   getHttp<T>(endpoint: string, params: {}): Observable<T> {

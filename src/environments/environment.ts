@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   token: 'bu4f8kn48v6uehqi3cqg',
+  apiUrl:'https://finnhub.io/api/v1',
 };
 
 /*
