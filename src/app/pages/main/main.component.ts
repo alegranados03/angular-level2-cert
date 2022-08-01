@@ -9,12 +9,17 @@ import { IStockCard } from 'src/app/interfaces/stock-quote.interface';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  isLoading: boolean = false;
   constructor(private stockService: StockService) {}
 
   get stockList() {
     return this.stockService.stockList;
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.stockService.isLoading.subscribe((value) => {
+      this.isLoading = value;
+    });
+  }
 
   onSearchEvent(symbol: string) {
     forkJoin([
@@ -32,6 +37,7 @@ export class MainComponent implements OnInit {
         previousClosePrice: quote.pc,
         percentChange: quote.dp,
       });
+      this.stockService.isLoading.next(false);
     });
   }
 

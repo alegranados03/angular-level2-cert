@@ -17,7 +17,6 @@ export class InputTextLimitDirective {
 
   @HostListener('keydown', ['$event'])
   lettersOnly(event: KeyboardEvent) {
-    console.log(event.key);
     event.stopPropagation();
     if (this.specialKeys.indexOf(event.key) !== -1) {
       return;

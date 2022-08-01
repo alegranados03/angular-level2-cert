@@ -5,6 +5,11 @@ legend {
 .stock-card {
   position: relative;
   padding: 1.2em;
+
+  &:hover{
+    transform: scale(1.01);
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
+  }
 }
 
 .close-btn {

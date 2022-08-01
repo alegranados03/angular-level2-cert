@@ -1,9 +1,19 @@
 <div class="container">
   <div class="card p-3 mt-4">
+    <div
+      class="alert alert-primary mt-2 text-center"
+      role="alert"
+      *ngIf="isLoading"
+    >
+      Getting data, please wait...
+    </div>
+    <h5>{{ symbol }}</h5>
     <h2>{{ companyName }}</h2>
-
     <div class="d-flex justify-content-around mt-3">
-      <div *ngIf="sentiments.length <= 0">
+      <div       
+      class="alert alert-danger mt-2 text-center"
+      role="alert"
+      *ngIf="sentiments.length <= 0 && isLoading === false">
         <h4>Woops! something happened, there's no info...</h4>
       </div>
       <div *ngFor="let sentiment of sentiments" class="month card flex-row p-3">

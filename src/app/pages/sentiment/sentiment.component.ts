@@ -12,13 +12,18 @@ import { StockService } from 'src/app/services/stock.service';
 })
 export class SentimentComponent implements OnInit {
   sentiments: ISentiment[] = [];
+  isLoading:boolean = false;
   companyName: string = '';
+  symbol: string = '';
   constructor(
     private stockService: StockService,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.stockService.isLoading.subscribe((value)=>{
+      this.isLoading = value;
+    });
     this.activatedRoute.params
       .pipe(
         switchMap((params) => {
@@ -37,11 +42,11 @@ export class SentimentComponent implements OnInit {
         })
       )
       .subscribe((responses) => {
-        // this.sentiments = sentiments;
         const [sentiments, company] = responses;
-        console.log(responses);
         this.companyName = company.description;
+        this.symbol = company.symbol;
         this.sentiments = sentiments;
+        this.stockService.isLoading.next(false);
       });
   }
 

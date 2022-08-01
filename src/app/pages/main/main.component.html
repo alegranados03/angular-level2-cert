@@ -1,6 +1,7 @@
 <div class="container p-2 mt-2">
   <app-search (searchEvent)="onSearchEvent($event)"></app-search>
 
+  <div class="alert alert-primary mt-2" role="alert" *ngIf="isLoading">Getting data, please wait...</div>
   <div class="d-grid mt-2 stock-grid">
     <app-stock
       *ngFor="let stock of stockList"

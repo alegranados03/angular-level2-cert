@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import {
   ISentiment,
   IStockCard,
   IstockQuote,
+  IStockSearchObject,
   IstockSearchResponse,
 } from '../interfaces/stock-quote.interface';
 import { AppHttpService } from './app-http.service';
@@ -15,6 +17,7 @@ import { AppHttpService } from './app-http.service';
 export class StockService {
   token = environment.token;
   private _stockList: IStockCard[] = [];
+  isLoading = new BehaviorSubject<boolean>(false);
   constructor(private appHttpService: AppHttpService) {
     const stocks = localStorage.getItem('stocks');
     if (stocks) {
@@ -26,18 +29,19 @@ export class StockService {
     return this._stockList;
   }
 
-  pushStock(stock: IStockCard) {
+  pushStock(stock: IStockCard): void {
     this._stockList.push(stock);
     localStorage.setItem('stocks', JSON.stringify(this._stockList));
   }
 
-  removeStock(stock: IStockCard) {
+  removeStock(stock: IStockCard): void {
     const index = this._stockList.indexOf(stock);
     this._stockList.splice(index, 1);
     localStorage.setItem('stocks', JSON.stringify(this._stockList));
   }
 
-  symbolSearch(params: string) {
+  symbolSearch(params: string): Observable<IStockSearchObject> {
+    this.isLoading.next(true);
     return this.appHttpService
       .getHttp<IstockSearchResponse>('/search', {
         q: params,
@@ -50,14 +54,20 @@ export class StockService {
       );
   }
 
-  getQuote(params: string) {
+  getQuote(params: string): Observable<IstockQuote> {
+    this.isLoading.next(true);
     return this.appHttpService.getHttp<IstockQuote>('/quote', {
       symbol: params,
       token: this.token,
     });
   }
 
-  getInsiderSentiment(params: { symbol: string; from: string; to: string }) {
+  getInsiderSentiment(params: {
+    symbol: string;
+    from: string;
+    to: string;
+  }): Observable<ISentiment[]> {
+    this.isLoading.next(true);
     return this.appHttpService
       .getHttp<{ data: ISentiment[]; symbol: string }>(
         '/stock/insider-sentiment',

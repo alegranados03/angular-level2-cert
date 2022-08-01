@@ -7,6 +7,11 @@ label {
   display: inline-block;
 }
 
+header {
+  background: #d1d8f3;
+  box-shadow: 8px 7px 7px -4px #888888;
+}
+
 @media screen and (max-width: 375px) {
   .form-control {
     width: 100%;
