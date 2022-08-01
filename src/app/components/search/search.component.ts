@@ -17,7 +17,7 @@ export class SearchComponent {
   constructor(private fb: FormBuilder) {}
 
   onSearch(): void {
-    if (this.searchForm.valid)
+    if (this.searchForm.valid && !!this.searchForm.value.symbol.trim())
       this.searchEvent.emit(this.searchForm.value.symbol.trim());
     this.searchForm.reset();
   }
