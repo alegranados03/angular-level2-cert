@@ -13,8 +13,17 @@ import { NumberToMonthPipe } from './pipes/number-to-month.pipe';
 import { NumberWithSignPipe } from './pipes/number-with-sign.pipe';
 import { InputTextLimitDirective } from './directives/input-text-limit.directive';
 
+const components = [
+  AppComponent,
+  SearchComponent,
+  StockComponent,
+  MainComponent,
+  SentimentComponent,
+];
+const pipes = [NumberToMonthPipe, NumberWithSignPipe];
+const directives = [InputTextLimitDirective];
 @NgModule({
-  declarations: [AppComponent, SearchComponent, StockComponent, MainComponent, SentimentComponent, NumberToMonthPipe, NumberWithSignPipe, InputTextLimitDirective],
+  declarations: [...components, ...pipes, ...directives],
   imports: [
     BrowserModule,
     AppRoutingModule,
